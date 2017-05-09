@@ -152,3 +152,8 @@ for (idx in 1:length(dataset[, 1])){
     #print (dataset$length[idx])
   }
 }
+
+write.csv(dataset, "data/pre-processed-data.csv", row.names = F)
+
+# save(dataset, file="dataset.Rdata")
+# load(dataset)
