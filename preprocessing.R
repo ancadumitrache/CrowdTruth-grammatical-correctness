@@ -186,7 +186,7 @@ len15_mean <- len15_mean/len15_counter
 len15_std_dev <- len15_std_dev/len15_counter
 
 
-#Calculate the plateauing in SD 
+#Plot the plateauing in SD 
 
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
@@ -203,3 +203,75 @@ for (idx in 1:length(dataset[, 1])) {
 
   dataset$std_dev_dropoff[idx] <- abs(std_dev_max - std_dev_max_minus_2)
 }
+
+#Plot dropoff per amount of workers
+
+length_sd_1 <- c()
+length_sd_2 <- c()
+length_sd_3 <- c()
+length_sd_4 <- c()
+length_sd_5 <- c()
+length_sd_6 <- c()
+length_sd_7 <- c()
+length_sd_8 <- c()
+length_sd_9 <- c()
+length_sd_10 <- c()
+length_sd_11 <- c()
+length_sd_12 <- c()
+length_sd_13 <- c()
+length_sd_14 <- c()
+length_sd_15 <- c()
+length_sd_16 <- c()
+length_sd_17 <- c()
+length_sd_18 <- c()
+length_sd_19 <- c()
+length_sd_20 <- c()
+
+for (idx in 1:length(dataset[, 1])) {
+  
+  for (jdx in 1:max_workers) {
+    
+    if (dataset$max_workers[idx] == 12) {
+      length_sd_12 <- append(length_sd_12, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 13) {
+      length_sd_13 <- append(length_sd_13, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 14) {
+      length_sd_14 <- append(length_sd_14, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 15) {
+      length_sd_15 <- append(length_sd_15, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 16) {
+      length_sd_16 <- append(length_sd_16, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 17) {
+      length_sd_17 <- append(length_sd_17, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 18) {
+      length_sd_18 <- append(length_sd_18, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 19) {
+      length_sd_19 <- append(length_sd_19, dataset$std_dev_dropoff[idx])
+    }
+    else if (dataset$max_workers[idx] == 20) {
+      length_sd_20 <- append(length_sd_20, dataset$std_dev_dropoff[idx])
+    }
+  }
+}
+
+avg_sd_dropoff_length_12 <- mean(length_sd_12)
+avg_sd_dropoff_length_13 <- mean(length_sd_13)
+avg_sd_dropoff_length_14 <- mean(length_sd_14)
+avg_sd_dropoff_length_15 <- mean(length_sd_15)
+avg_sd_dropoff_length_16 <- mean(length_sd_16)
+avg_sd_dropoff_length_17 <- mean(length_sd_17)
+avg_sd_dropoff_length_18 <- mean(length_sd_18)
+avg_sd_dropoff_length_19 <- mean(length_sd_19)
+avg_sd_dropoff_length_20 <- mean(length_sd_20)
+
+vectorplot <- c(avg_sd_dropoff_length_12, avg_sd_dropoff_length_13, avg_sd_dropoff_length_14, avg_sd_dropoff_length_15, avg_sd_dropoff_length_16, avg_sd_dropoff_length_17, avg_sd_dropoff_length_18, avg_sd_dropoff_length_19, avg_sd_dropoff_length_20)
+
+plot(vectorplot, type = "l", main = "SD Dropoff", ylab ="SD Dropoff", xlab ="number of workers", xaxt='n')
+axis(1, at=1:9, labels= 12:20)
