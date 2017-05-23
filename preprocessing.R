@@ -23,6 +23,7 @@ dif_std_dev_12 <- 0
 
 dif_std_dev <-0
 
+std_dev_dropoff <- 0 
 
 
 # populate data frame
@@ -141,19 +142,64 @@ no_std_dev <- no_std_dev/no_counter
 
 #calculate mean + std_dev of sentence length
 
+len5_mean = 0
+len5_std_dev = 0
+len5_counter = 0
+
+len10_mean = 0
+len10_std_dev = 0
+len10_counter = 0
+
+len15_mean = 0
+len15_std_dev = 0
+len15_counter = 0
+
 for (idx in 1:length(dataset[, 1])){
-  if (dataset$length[idx] <= 5){
-    mean_len_5 <- mean_len_5 + dataset$length[idx]
+  
+  if (dataset$length[idx] >= 5 && dataset$length[idx] <= 10){
+    #print(dataset$length[idx])
+    len5_mean <- len5_mean + dataset$mean_rating[idx]
+    len5_std_dev <- len5_std_dev + dataset$std_dev[idx]
+    len5_counter <- len5_counter + 1
   }
-  else if (dataset$length[idx] >=6 & dataset$length[idx] <= 10){
-    #print (dataset$length[idx])
+  
+  else if (dataset$length[idx] >= 11 & dataset$length[idx] <= 15){
+    len10_mean <- len10_mean + dataset$mean_rating[idx]
+    len10_std_dev <- len10_std_dev + dataset$std_dev[idx]
+    len10_counter <- len10_counter + 1
   }
-  else if (dataset$length[idx] > 10){
-    #print (dataset$length[idx])
+  
+  else if (dataset$length[idx] >= 16 & dataset$length[idx] <= 25){
+    len15_mean <- len15_mean + dataset$mean_rating[idx]
+    len15_std_dev <- len15_std_dev + dataset$std_dev[idx]
+    len15_counter <- len15_counter + 1
   }
 }
 
-write.csv(dataset, "data/pre-processed-data.csv", row.names = F)
+len5_mean <- len5_mean/len5_counter 
+len5_std_dev <- len5_std_dev/len5_counter
 
-# save(dataset, file="dataset.Rdata")
-# load(dataset)
+len10_mean <- len10_mean/len10_counter 
+len10_std_dev <- len10_std_dev/len10_counter
+
+len15_mean <- len15_mean/len15_counter 
+len15_std_dev <- len15_std_dev/len15_counter
+
+
+#Calculate the plateauing in SD 
+
+for (idx in 1:length(dataset[, 1])) {
+  vector <- c()
+  split <- strsplit(dataset$rating_list[idx], ",")[[1]]
+
+  for (jdx in 1:length(split)) {
+    vector <- append(vector, as.numeric(split[jdx]))
+  }
+  
+  std_dev_max <- sd (vector)
+  vector <- vector[-length(vector)]
+  vector <- vector[-length(vector)]
+  std_dev_max_minus_2 <- sd (vector)
+
+  dataset$std_dev_dropoff[idx] <- abs(std_dev_max - std_dev_max_minus_2)
+}
