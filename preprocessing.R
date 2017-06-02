@@ -275,3 +275,23 @@ vectorplot <- c(avg_sd_dropoff_length_12, avg_sd_dropoff_length_13, avg_sd_dropo
 
 plot(vectorplot, type = "l", main = "SD Dropoff", ylab ="SD Dropoff", xlab ="number of workers", xaxt='n')
 axis(1, at=1:9, labels= 12:20)
+
+#ranking most complex sentences based on conjuctions
+
+for (idx in 1:length(dataset[, 1])) {
+  complexity = 0
+  split <- strsplit(dataset$text[idx], " ")[[1]]
+  complexity <- complexity + (length (grep("^for$", split)))
+  complexity <- complexity + (length (grep("^and$", split)))
+  complexity <- complexity + (length (grep("^nor$", split)))
+  complexity <- complexity + (length (grep("^but$", split)))
+  complexity <- complexity + (length (grep("^or$", split)))
+  complexity <- complexity + (length (grep("^yet$", split)))
+  complexity <- complexity + (length (grep("^so$", split)))
+
+  dataset$complexity[idx] <- complexity
+}
+  
+
+#exporting dataset as csv
+write.csv(dataset, file = "MyData.csv",row.names=FALSE, na="")
