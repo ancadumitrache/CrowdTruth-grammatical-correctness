@@ -1,5 +1,5 @@
 #dataset <- read.csv("data/1608531_enwiki.csv", sep = "\t", stringsAsFactors = F)
-dataset <- read.csv("data/intermediary_results_combined_ratinglist.csv", sep = ";", stringsAsFactors = F)
+dataset <- read.csv("data/intermediary_results_combined_ratinglist_1.csv", sep = ";", stringsAsFactors = F)
 
 
 # calculate max number of workers
@@ -19,6 +19,7 @@ dataset$std_dev <- 0
 dataset$std_dev_4 <- 0
 dataset$std_dev_8 <- 0
 dataset$std_dev_12 <- 0
+dataset$mean_rating <-0
 
 dif_std_dev_4 <- 0
 dif_std_dev_8 <- 0
@@ -34,6 +35,7 @@ for (idx in 1:length(dataset[, 1])) {
   vector <- c()
   split <- strsplit(dataset$combined_rating_list[idx], ",")[[1]]
   dataset$max_workers[idx] <- length(split)
+  dataset$mean_rating[idx] <- mean(as.numeric(c(strsplit((c(dataset$combined_rating_list[idx])), ",")[[1]])))
   
   for (jdx in 1:length(split)) {
     dataset[idx, paste("worker", jdx, sep = "_")] <- as.numeric(split[jdx])
@@ -193,7 +195,7 @@ len15_std_dev <- len15_std_dev/len15_counter
 
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
-  split <- strsplit(dataset$rating_list[idx], ",")[[1]]
+  split <- strsplit(dataset$combined_rating_list[idx], ",")[[1]]
 
   for (jdx in 1:length(split)) {
     vector <- append(vector, as.numeric(split[jdx]))
@@ -295,5 +297,41 @@ for (idx in 1:length(dataset[, 1])) {
   dataset$complexity[idx] <- complexity
 }
 
+#dataset create length
+dataset$length <- 0
+
+#dropoff for <20 <30 <40 <50
+dropoff20 <- c()
+dropoff30 <- c()
+dropoff40 <- c()
+dropoff50 <- c()
+dropoff60 <- c()
+
+for (idx in 1:length(dataset[, 1])) {
+  
+  if (dataset$max_workers[idx] < 21) {
+    dropoff20 <- append(dropoff20, dataset$std_dev_dropoff[idx])
+  }
+  
+  else if (dataset$max_workers[idx] < 31) {
+    dropoff30 <- append(dropoff30, dataset$std_dev_dropoff[idx])
+  }
+  
+  else if (dataset$max_workers[idx] < 41) {
+    dropoff40 <- append(dropoff40, dataset$std_dev_dropoff[idx])
+  }
+  
+  else if (dataset$max_workers[idx] < 51) {
+    dropoff50 <- append(dropoff50, dataset$std_dev_dropoff[idx])
+  }
+  
+  else if (dataset$max_workers[idx] < 61) {
+    dropoff60 <- append(dropoff60, dataset$std_dev_dropoff[idx])
+  }
+  
+}
+
+
+
 #exporting dataset as csv
-write.csv(dataset, file = "MyData.csv",row.names=FALSE, na="")
+write.csv(dataset, file = "MyDataIntermediary.csv",row.names=FALSE, na="")
