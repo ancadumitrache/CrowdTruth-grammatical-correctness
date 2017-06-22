@@ -1,6 +1,6 @@
 dataset <- read.csv("data/MOP2_final.csv", sep = ",", stringsAsFactors = F)
 dataset <- read.csv("data/MOP4_final.csv", sep = ",", stringsAsFactors = F)
-dataset <- read.csv("data/MOP4_vs_MOP2_final.csv", sep = ";", stringsAsFactors = F)
+dataset <- read.csv("data/MOP4_vs_MOP2.csv", sep = ";", stringsAsFactors = F)
 
 # calculate max number of workers
 #max_workers <- 0
@@ -394,6 +394,16 @@ for (idx in 1:length(dataset[, 1])) {
 
 #compare difference_mean and difference_sd to amount of workers
 
+#compare difference_mean and difference_sd to amount of workers
+
+
+worker1_mean_dif <- c()
+worker2_mean_dif <- c()
+worker3_mean_dif <- c()
+worker4_mean_dif <- c()
+worker5_mean_dif <- c()
+worker6_mean_dif <- c()
+worker7_mean_dif <- c()
 worker8_mean_dif <- c()
 worker9_mean_dif <- c()
 worker10_mean_dif <- c()
@@ -408,6 +418,14 @@ worker18_mean_dif <- c()
 worker19_mean_dif <- c()
 worker20_mean_dif <- c()
 
+
+worker1_sd_dif <- c()
+worker2_sd_dif <- c()
+worker3_sd_dif <- c()
+worker4_sd_dif <- c()
+worker5_sd_dif <- c()
+worker6_sd_dif <- c()
+worker7_sd_dif <- c()
 worker8_sd_dif <- c()
 worker9_sd_dif <- c()
 worker10_sd_dif <- c()
@@ -426,7 +444,37 @@ for (idx in 1:length(dataset[, 1])){
   if (!is.na(as.numeric(dataset$mean_difference[idx]))){
     if (!is.na(as.numeric(dataset$sd_difference[idx]))){
       
-      if (as.numeric(dataset$max_workers[idx]) == 8){
+      if (as.numeric(dataset$max_workers[idx]) == 2){
+        worker2_mean_dif <- append(worker2_mean_dif, dataset$mean_difference[idx])
+        worker2_sd_dif <- append(worker2_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 3){
+        worker3_mean_dif <- append(worker3_mean_dif, dataset$mean_difference[idx])
+        worker3_sd_dif <- append(worker3_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 4){
+        worker4_mean_dif <- append(worker4_mean_dif, dataset$mean_difference[idx])
+        worker4_sd_dif <- append(worker4_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 5){
+        worker5_mean_dif <- append(worker5_mean_dif, dataset$mean_difference[idx])
+        worker5_sd_dif <- append(worker5_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 6){
+        worker6_mean_dif <- append(worker6_mean_dif, dataset$mean_difference[idx])
+        worker6_sd_dif <- append(worker6_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 7){
+        worker7_mean_dif <- append(worker7_mean_dif, dataset$mean_difference[idx])
+        worker7_sd_dif <- append(worker7_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 8){
         worker8_mean_dif <- append(worker8_mean_dif, dataset$mean_difference[idx])
         worker8_sd_dif <- append(worker8_sd_dif, dataset$sd_difference[idx])
       }
@@ -434,11 +482,64 @@ for (idx in 1:length(dataset[, 1])){
         worker9_mean_dif <- append(worker9_mean_dif, dataset$mean_difference[idx])
         worker9_sd_dif <- append(worker9_sd_dif, dataset$sd_difference[idx])
       }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 10){
+        worker10_mean_dif <- append(worker10_mean_dif, dataset$mean_difference[idx])
+        worker10_sd_dif <- append(worker10_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 11){
+        worker11_mean_dif <- append(worker11_mean_dif, dataset$mean_difference[idx])
+        worker11_sd_dif <- append(worker11_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 12){
+        worker12_mean_dif <- append(worker12_mean_dif, dataset$mean_difference[idx])
+        worker12_sd_dif <- append(worker12_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 13){
+        worker13_mean_dif <- append(worker13_mean_dif, dataset$mean_difference[idx])
+        worker13_sd_dif <- append(worker13_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 14){
+        worker14_mean_dif <- append(worker14_mean_dif, dataset$mean_difference[idx])
+        worker14_sd_dif <- append(worker14_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 15){
+        worker15_mean_dif <- append(worker15_mean_dif, dataset$mean_difference[idx])
+        worker15_sd_dif <- append(worker15_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 16){
+        worker16_mean_dif <- append(worker16_mean_dif, dataset$mean_difference[idx])
+        worker16_sd_dif <- append(worker16_sd_dif, dataset$sd_difference[idx])
+      } 
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 17){
+        worker17_mean_dif <- append(worker17_mean_dif, dataset$mean_difference[idx])
+        worker17_sd_dif <- append(worker17_sd_dif, dataset$sd_difference[idx])
+      }
+      
+      else if (as.numeric(dataset$max_workers[idx]) == 18){
+        worker18_mean_dif <- append(worker18_mean_dif, dataset$mean_difference[idx])
+        worker18_sd_dif <- append(worker18_sd_dif, dataset$sd_difference[idx])
+        
+      }  
+      else if (as.numeric(dataset$max_workers[idx]) == 19){
+        worker19_mean_dif <- append(worker19_mean_dif, dataset$mean_difference[idx])
+        worker19_sd_dif <- append(worker19_sd_dif, dataset$sd_difference[idx])
+      }
+      else if (as.numeric(dataset$max_workers[idx]) == 20){
+        worker20_mean_dif <- append(worker20_mean_dif, dataset$mean_difference[idx])
+        worker20_sd_dif <- append(worker20_sd_dif, dataset$sd_difference[idx])
+      }
     }
-  }
 }
-
-
+}
+  
 #exporting dataset as csv
 write.csv(dataset, file = "MOP2_final.csv",row.names=FALSE, na="")
 write.csv(dataset, file = "MOP4_final_mergemop2.csv",row.names=FALSE, na="")
