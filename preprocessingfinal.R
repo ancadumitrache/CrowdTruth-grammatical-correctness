@@ -1,41 +1,48 @@
-#dataset <- read.csv("data/1608531_enwiki.csv", sep = "\t", stringsAsFactors = F)
-dataset <- read.csv("data/intermediary_results_combined_ratinglist_1.csv", sep = ";", stringsAsFactors = F)
-dataset <- read.csv("data/final_results_mop_2.csv", sep = ",", stringsAsFactors = F)
-dataset <- read.csv("data/mop2_final.csv", sep = ";", stringsAsFactors = F)
-dataset <- read.csv("data/mop4_final.csv", sep = ";", stringsAsFactors = F)
+dataset <- read.csv("data/MOP2_final.csv", sep = ",", stringsAsFactors = F)
+dataset <- read.csv("data/MOP4_final.csv", sep = ",", stringsAsFactors = F)
+dataset <- read.csv("data/MOP4_vs_MOP2_final.csv", sep = ";", stringsAsFactors = F)
 
 # calculate max number of workers
-max_workers <- 0
-for (idx in 1:length(dataset[, 1])) {
-  split <- strsplit(dataset$merged_ratings[idx], ",")[[1]]
-  max_workers <- max(max_workers, length(split))
-}
+#max_workers <- 0
+#for (idx in 1:length(dataset[, 1])) {
+#  split <- strsplit(dataset$merged_ratings[idx], ",")[[1]]
+#  max_workers <- max(max_workers, length(split))
+#}
 
 # make data frame with fixed number of columns
-for (idx in 1:max_workers) {
-  dataset[, paste("worker", idx, sep = "_")] <- NA
-}
+#for (idx in 1:max_workers) {
+#  dataset[, paste("worker", idx, sep = "_")] <- NA
+#}
 
-dataset$max_workers <- 0
-dataset$std_dev <- 0
-dataset$mean_rating <-0
-dif_std_dev <-0
-std_dev_dropoff <- 0 
+#dataset$max_workers <- 0
+#dataset$std_dev <- 0
+#dataset$mean_rating <-0
+#dif_std_dev <-0
+#std_dev_dropoff <- 0 
 
 
-# populate data frame
+# populate data frame MOP 4
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
   split <- strsplit(dataset$merged_ratings[idx], ",")[[1]]
   dataset$max_workers[idx] <- length(split)
   dataset$mean_rating[idx] <- mean(as.numeric(c(strsplit((c(dataset$merged_ratings[idx])), ",")[[1]])))
-  
-  for (jdx in 1:length(split)) {
-    dataset[idx, paste("worker", jdx, sep = "_")] <- as.numeric(split[jdx])
-    vector <- append(vector, as.numeric(split[jdx]))
+  dataset$std_dev[idx] <- sd(as.numeric(c(strsplit((c(dataset$merged_ratings[idx])), ",")[[1]])))
+}
 
-  dataset$std_dev[idx] <- sd (vector)
-  }
+# populate data frame MOP 2
+for (idx in 1:length(dataset[, 1])) {
+  vector <- c()
+  split <- strsplit(dataset$how_natural[idx], ",")[[1]]
+  dataset$max_workers[idx] <- length(split)
+  dataset$mean_rating[idx] <- mean(as.numeric(c(strsplit((c(dataset$how_natural[idx])), ",")[[1]])))
+  dataset$std_dev[idx] <- sd(as.numeric(c(strsplit((c(dataset$how_natural[idx])), ",")[[1]])))
+  
+}
+  #for (jdx in 1:length(split)) {
+  #  dataset[idx, paste("worker", jdx, sep = "_")] <- as.numeric(split[jdx])
+  #  vector <- append(vector, as.numeric(split[jdx]))
+  #}
 
 #calculate mean + std_dev per country
 ja_mean = 0
@@ -130,69 +137,69 @@ len25_mean <- c()
 for (idx in 1:length(dataset[, 1])){
   if (!is.na(as.numeric(dataset$length[idx]))){
     
-  if (as.numeric(dataset$length[idx]) == 8){
-    len8_mean <- append(len8_mean, dataset$mean_rating[idx])
+    if (as.numeric(dataset$length[idx]) == 8){
+      len8_mean <- append(len8_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 9){
+      len9_mean <- append(len9_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 10){
+      len10_mean <- append(len10_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 11){
+      len11_mean <- append(len11_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 12){
+      len12_mean <- append(len12_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 13){
+      len13_mean <- append(len13_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 14){
+      len14_mean <- append(len14_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 15){
+      len15_mean <- append(len15_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 16){
+      len16_mean <- append(len16_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 17){
+      len17_mean <- append(len17_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 18){
+      len18_mean <- append(len18_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 19){
+      len19_mean <- append(len19_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 20){
+      len20_mean <- append(len20_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 21){
+      len21_mean <- append(len21_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 22){
+      len22_mean <- append(len22_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 23){
+      len23_mean <- append(len23_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 24){
+      len24_mean <- append(len24_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$length[idx] == 25){
+      len25_mean <- append(len25_mean, dataset$mean_rating[idx])
+    }
   }
-  else if (dataset$length[idx] == 9){
-    len9_mean <- append(len9_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 10){
-    len10_mean <- append(len10_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 11){
-    len11_mean <- append(len11_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 12){
-    len12_mean <- append(len12_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 13){
-    len13_mean <- append(len13_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 14){
-    len14_mean <- append(len14_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 15){
-    len15_mean <- append(len15_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 16){
-    len16_mean <- append(len16_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 17){
-    len17_mean <- append(len17_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 18){
-    len18_mean <- append(len18_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 19){
-    len19_mean <- append(len19_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 20){
-    len20_mean <- append(len20_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 21){
-    len21_mean <- append(len21_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 22){
-    len22_mean <- append(len22_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 23){
-    len23_mean <- append(len23_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 24){
-    len24_mean <- append(len24_mean, dataset$mean_rating[idx])
-  }
-  else if (dataset$length[idx] == 25){
-    len25_mean <- append(len25_mean, dataset$mean_rating[idx])
-  }
-}
 }
 
 ########### Trying to create a for loop
-mean(len8_mean) 
-sd(len8_mean)
-for (idx in 1:25){
-  print(mean(lenidx_mean) "," sd(lenidx_mean))
-}
+#mean(len8_mean) 
+#sd(len8_mean)
+#for (idx in 1:25){
+#  print(mean(lenidx_mean) "," sd(lenidx_mean))
+#}
 
 
 
@@ -201,7 +208,7 @@ for (idx in 1:25){
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
   split <- strsplit(dataset$combined_rating_list[idx], ",")[[1]]
-
+  
   for (jdx in 1:length(split)) {
     vector <- append(vector, as.numeric(split[jdx]))
   }
@@ -210,7 +217,7 @@ for (idx in 1:length(dataset[, 1])) {
   vector <- vector[-length(vector)]
   vector <- vector[-length(vector)]
   std_dev_max_minus_2 <- sd (vector)
-
+  
   dataset$std_dev_dropoff[idx] <- abs(std_dev_max - std_dev_max_minus_2)
 }
 
@@ -269,7 +276,6 @@ for (idx in 1:length(dataset[, 1])) {
       length_sd_20 <- append(length_sd_20, dataset$std_dev_dropoff[idx])
     }
   }
-}
 
 #avg_sd_dropoff_length_12 <- mean(length_sd_12)
 #avg_sd_dropoff_length_13 <- mean(length_sd_13)
@@ -286,7 +292,7 @@ for (idx in 1:length(dataset[, 1])) {
 #plot(vectorplot, type = "l", main = "SD Dropoff", ylab ="SD Dropoff", xlab ="number of workers", xaxt='n')
 #axis(1, at=1:9, labels= 12:20)
 
-#ranking most complex sentences based on conjuctions
+#populate dataset with complexity
 
 for (idx in 1:length(dataset[, 1])) {
   complexity = 0
@@ -304,6 +310,32 @@ for (idx in 1:length(dataset[, 1])) {
   
   dataset$complexity[idx] <- complexity
 }
+
+#Calculate and print average complexity mean + sd
+
+comp0_mean <- c()
+comp1_mean <- c()
+comp2_mean <- c()
+comp3_mean <- c()
+
+for (idx in 1:length(dataset[, 1])){
+  if (!is.na(as.numeric(dataset$complexity[idx]))){
+    
+    if (as.numeric(dataset$complexity[idx]) == 0){
+      comp0_mean <- append(comp0_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$complexity[idx] == 1){
+      comp1_mean <- append(comp1_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$complexity[idx] == 2){
+      comp2_mean <- append(comp2_mean, dataset$mean_rating[idx])
+    }
+    else if (dataset$complexity[idx] == 3){
+      comp3_mean <- append(comp3_mean, dataset$mean_rating[idx])
+    }
+  }
+}
+
 
 #dropoff for <20 <30 <40 <50
 dropoff20 <- c()
@@ -333,7 +365,6 @@ for (idx in 1:length(dataset[, 1])) {
   else if (dataset$max_workers[idx] < 61) {
     dropoff60 <- append(dropoff60, dataset$std_dev_dropoff[idx])
   }
-  
 }
 
 #calculate how many reasons have been given
@@ -347,6 +378,67 @@ for (idx in 1:length(dataset[, 1])) {
   dataset$followup1[idx]<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
 }
 
+#compare difference_mean and difference_sd between mop2 & mop4 
+
+for (idx in 1:length(dataset[, 1])) {
+  
+  mop4_mean <- as.numeric(strsplit(dataset$mean_rating[idx], " ")[[1]][1])
+  mop2_mean <- as.numeric(strsplit(dataset$mean_rating[idx], " ")[[1]][2])
+  dataset$mean_difference[idx] <- abs(mop4_mean - mop2_mean)
+  
+  mop4_sd <- as.numeric(strsplit(dataset$std_dev[idx], " ")[[1]][1])
+  mop2_sd <- as.numeric(strsplit(dataset$std_dev[idx], " ")[[1]][2])
+  dataset$sd_difference[idx] <- abs(mop4_sd - mop2_sd)
+                                                          
+}
+
+#compare difference_mean and difference_sd to amount of workers
+
+worker8_mean_dif <- c()
+worker9_mean_dif <- c()
+worker10_mean_dif <- c()
+worker11_mean_dif <- c()
+worker12_mean_dif <- c()
+worker13_mean_dif <- c()
+worker14_mean_dif <- c()
+worker15_mean_dif <- c()
+worker16_mean_dif <- c()
+worker17_mean_dif <- c()
+worker18_mean_dif <- c()
+worker19_mean_dif <- c()
+worker20_mean_dif <- c()
+
+worker8_sd_dif <- c()
+worker9_sd_dif <- c()
+worker10_sd_dif <- c()
+worker11_sd_dif <- c()
+worker12_sd_dif <- c()
+worker13_sd_dif <- c()
+worker14_sd_dif <- c()
+worker15_sd_dif <- c()
+worker16_sd_dif <- c()
+worker17_sd_dif <- c()
+worker18_sd_dif <- c()
+worker19_sd_dif <- c()
+worker20_sd_dif <- c()
+
+for (idx in 1:length(dataset[, 1])){
+  if (!is.na(as.numeric(dataset$mean_difference[idx]))){
+    if (!is.na(as.numeric(dataset$sd_difference[idx]))){
+      
+      if (as.numeric(dataset$max_workers[idx]) == 8){
+        worker8_mean_dif <- append(worker8_mean_dif, dataset$mean_difference[idx])
+        worker8_sd_dif <- append(worker8_sd_dif, dataset$sd_difference[idx])
+      }
+      else if (as.numeric(dataset$max_workers[idx]) == 9){
+        worker9_mean_dif <- append(worker9_mean_dif, dataset$mean_difference[idx])
+        worker9_sd_dif <- append(worker9_sd_dif, dataset$sd_difference[idx])
+      }
+    }
+  }
+}
+
+
 #exporting dataset as csv
 write.csv(dataset, file = "MOP2_final.csv",row.names=FALSE, na="")
-write.csv(dataset, file = "MOP4_final.csv",row.names=FALSE, na="")
+write.csv(dataset, file = "MOP4_final_mergemop2.csv",row.names=FALSE, na="")
