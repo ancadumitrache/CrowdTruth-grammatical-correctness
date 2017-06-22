@@ -207,7 +207,7 @@ for (idx in 1:length(dataset[, 1])){
 
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
-  split <- strsplit(dataset$combined_rating_list[idx], ",")[[1]]
+  split <- strsplit(dataset$merged_ratings[idx], ",")[[1]]
   
   for (jdx in 1:length(split)) {
     vector <- append(vector, as.numeric(split[jdx]))
@@ -337,34 +337,142 @@ for (idx in 1:length(dataset[, 1])){
 }
 
 
-#dropoff for <20 <30 <40 <50
-dropoff20 <- c()
-dropoff30 <- c()
-dropoff40 <- c()
-dropoff50 <- c()
-dropoff60 <- c()
+#dropoff for per worker
+
+for (idx in 16:40){ 
+  assign(paste("dropoff_mean",idx, sep="_"), (c(NULL)))
+  assign(paste("dropoff_std_dev",idx, sep="_"), (c(NULL)))
+}
+
+#for (idx in 1:length(dataset[, 1])) {
+  temp_mean <- (paste("dropoff_mean",dataset$max_workers[3], sep = "_"))
+  
+  if (!is.na(as.numeric(dataset$max_workers[idx]))){
+    for (jdx in 16:40){
+      if (as.numeric(dataset$max_workers[idx] == jdx)){
+        temp_mean <- append(as.name(temp_mean), dataset$mean_rating[idx])
+        
+      }
+    }
+  }
+}
 
 for (idx in 1:length(dataset[, 1])) {
   
-  if (dataset$max_workers[idx] < 21) {
-    dropoff20 <- append(dropoff20, dataset$std_dev_dropoff[idx])
+  if (!is.na(as.numeric(dataset$max_workers[idx]))){
+    if (as.numeric(dataset$max_workers[idx] == 16)){
+      dropoff_mean_16 <- append(dropoff_mean_16, dataset$mean_rating[idx])
+      dropoff_std_dev_16 <- append(dropoff_std_dev_16, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 17)){
+      dropoff_mean_17 <- append(dropoff_mean_17, dataset$mean_rating[idx])
+      dropoff_std_dev_17 <- append(dropoff_std_dev_17, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 18)){
+      dropoff_mean_18 <- append(dropoff_mean_18, dataset$mean_rating[idx])
+      dropoff_std_dev_18 <- append(dropoff_std_dev_18, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 19)){
+      dropoff_mean_19 <- append(dropoff_mean_19, dataset$mean_rating[idx])
+      dropoff_std_dev_19 <- append(dropoff_std_dev_19, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 20)){
+      dropoff_mean_20 <- append(dropoff_mean_20, dataset$mean_rating[idx])
+      dropoff_std_dev_20 <- append(dropoff_std_dev_20, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 21)){
+      dropoff_mean_21 <- append(dropoff_mean_21, dataset$mean_rating[idx])
+      dropoff_std_dev_21 <- append(dropoff_std_dev_21, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 22)){
+      dropoff_mean_22 <- append(dropoff_mean_22, dataset$mean_rating[idx])
+      dropoff_std_dev_22 <- append(dropoff_std_dev_22, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 23)){
+      dropoff_mean_23 <- append(dropoff_mean_23, dataset$mean_rating[idx])
+      dropoff_std_dev_23 <- append(dropoff_std_dev_23, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 24)){
+      dropoff_mean_24 <- append(dropoff_mean_24, dataset$mean_rating[idx])
+      dropoff_std_dev_24 <- append(dropoff_std_dev_24, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 25)){
+      dropoff_mean_25 <- append(dropoff_mean_25, dataset$mean_rating[idx])
+      dropoff_std_dev_25 <- append(dropoff_std_dev_25, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 26)){
+      dropoff_mean_26 <- append(dropoff_mean_26, dataset$mean_rating[idx])
+      dropoff_std_dev_26 <- append(dropoff_std_dev_26, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 27)){
+      dropoff_mean_27 <- append(dropoff_mean_27, dataset$mean_rating[idx])
+      dropoff_std_dev_27 <- append(dropoff_std_dev_27, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 28)){
+      dropoff_mean_28 <- append(dropoff_mean_28, dataset$mean_rating[idx])
+      dropoff_std_dev_28 <- append(dropoff_std_dev_28, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 29)){
+      dropoff_mean_29 <- append(dropoff_mean_29, dataset$mean_rating[idx])
+      dropoff_std_dev_29 <- append(dropoff_std_dev_29, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 30)){
+      dropoff_mean_30 <- append(dropoff_mean_30, dataset$mean_rating[idx])
+      dropoff_std_dev_30 <- append(dropoff_std_dev_30, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 31)){
+      dropoff_mean_31 <- append(dropoff_mean_31, dataset$mean_rating[idx])
+      dropoff_std_dev_31 <- append(dropoff_std_dev_31, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 32)){
+      dropoff_mean_32 <- append(dropoff_mean_32, dataset$mean_rating[idx])
+      dropoff_std_dev_32 <- append(dropoff_std_dev_32, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 33)){
+      dropoff_mean_33 <- append(dropoff_mean_33, dataset$mean_rating[idx])
+      dropoff_std_dev_33 <- append(dropoff_std_dev_33, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 34)){
+      dropoff_mean_34 <- append(dropoff_mean_34, dataset$mean_rating[idx])
+      dropoff_std_dev_34 <- append(dropoff_std_dev_34, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 35)){
+      dropoff_mean_35 <- append(dropoff_mean_35, dataset$mean_rating[idx])
+      dropoff_std_dev_35 <- append(dropoff_std_dev_35, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 36)){
+      dropoff_mean_36 <- append(dropoff_mean_36, dataset$mean_rating[idx])
+      dropoff_std_dev_36 <- append(dropoff_std_dev_36, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 37)){
+      dropoff_mean_37 <- append(dropoff_mean_37, dataset$mean_rating[idx])
+      dropoff_std_dev_37 <- append(dropoff_std_dev_37, dataset$std_dev_dropoff[idx])
+    }
+    
+    else if (as.numeric(dataset$max_workers[idx] == 38)){
+      dropoff_mean_38 <- append(dropoff_mean_38, dataset$mean_rating[idx])
+      dropoff_std_dev_38 <- append(dropoff_std_dev_38, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 39)){
+      dropoff_mean_39 <- append(dropoff_mean_39, dataset$mean_rating[idx])
+      dropoff_std_dev_39 <- append(dropoff_std_dev_39, dataset$std_dev_dropoff[idx])
+    }
+    else if (as.numeric(dataset$max_workers[idx] == 40)){
+      dropoff_mean_40 <- append(dropoff_mean_40, dataset$mean_rating[idx])
+      dropoff_std_dev_40 <- append(dropoff_std_dev_40, dataset$std_dev_dropoff[idx])
+    }
   }
-  
-  else if (dataset$max_workers[idx] < 31) {
-    dropoff30 <- append(dropoff30, dataset$std_dev_dropoff[idx])
-  }
-  
-  else if (dataset$max_workers[idx] < 41) {
-    dropoff40 <- append(dropoff40, dataset$std_dev_dropoff[idx])
-  }
-  
-  else if (dataset$max_workers[idx] < 51) {
-    dropoff50 <- append(dropoff50, dataset$std_dev_dropoff[idx])
-  }
-  
-  else if (dataset$max_workers[idx] < 61) {
-    dropoff60 <- append(dropoff60, dataset$std_dev_dropoff[idx])
-  }
+}
+
+for (idx in 16:40){ 
+  print(as.name(paste("dropoff_mean",idx, sep="_")))
 }
 
 #calculate how many reasons have been given
@@ -389,13 +497,10 @@ for (idx in 1:length(dataset[, 1])) {
   mop4_sd <- as.numeric(strsplit(dataset$std_dev[idx], " ")[[1]][1])
   mop2_sd <- as.numeric(strsplit(dataset$std_dev[idx], " ")[[1]][2])
   dataset$sd_difference[idx] <- abs(mop4_sd - mop2_sd)
-                                                          
 }
 
 #compare difference_mean and difference_sd to amount of workers
-
-#compare difference_mean and difference_sd to amount of workers
-
+{
 
 worker1_mean_dif <- c()
 worker2_mean_dif <- c()
@@ -539,7 +644,74 @@ for (idx in 1:length(dataset[, 1])){
     }
 }
 }
-  
+
+}
+
+#calculate how many specific reasons
+ja_reasons <- c()
+zh_reasons <- c()
+no_reasons <- c()
+es_reasons <- c()
+en_reasons <- c()
+
+
+for (idx in 1:length(dataset[, 1])){
+  if (!is.na((dataset$language[idx]))){
+    
+    if (dataset$language[idx] == "ja"){
+      split<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
+      split <- c(as.numeric(strsplit(split, ",")[[1]]))
+      for (jdx in 1:length(split)){
+        if (!is.na((split[jdx]))){
+          ja_reasons <- append(ja_reasons, split[jdx]) 
+        }
+      }
+    }
+    if (dataset$language[idx] == "zh"){
+      split<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
+      split <- c(as.numeric(strsplit(split, ",")[[1]]))
+      for (jdx in 1:length(split)){
+        if (!is.na((split[jdx]))){
+          zh_reasons <- append(zh_reasons, split[jdx]) 
+        }
+      }
+    }
+    if (dataset$language[idx] == "no"){
+      split<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
+      split <- c(as.numeric(strsplit(split, ",")[[1]]))
+      for (jdx in 1:length(split)){
+        if (!is.na((split[jdx]))){
+          no_reasons <- append(no_reasons, split[jdx]) 
+        }
+      }
+    }
+    if (dataset$language[idx] == "es"){
+      split<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
+      split <- c(as.numeric(strsplit(split, ",")[[1]]))
+      for (jdx in 1:length(split)){
+        if (!is.na((split[jdx]))){
+          es_reasons <- append(es_reasons, split[jdx]) 
+        }
+      }
+    }
+    if (dataset$language[idx] == "en"){
+      split<- gsub("\n", ",", dataset$followup1[idx], fixed = TRUE)
+      split <- c(as.numeric(strsplit(split, ",")[[1]]))
+      for (jdx in 1:length(split)){
+        if (!is.na((split[jdx]))){
+          en_reasons <- append(en_reasons, split[jdx]) 
+        }
+      }
+    }
+  }
+}
+
+ja_table <- table(ja_reasons)
+zh_table <- table(zh_reasons)
+no_table <- table(no_reasons)
+es_table <- table(es_reasons)
+en_table <- table(en_reasons)
+
 #exporting dataset as csv
 write.csv(dataset, file = "MOP2_final.csv",row.names=FALSE, na="")
 write.csv(dataset, file = "MOP4_final_mergemop2.csv",row.names=FALSE, na="")
