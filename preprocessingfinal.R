@@ -3,8 +3,6 @@ dataset <- read.csv("data/MOP4_final.csv", sep = ",", stringsAsFactors = F)
 dataset <- read.csv("data/MOP4_vs_MOP2.csv", sep = ";", stringsAsFactors = F)
 dataset <- read.csv("data/MOP2_final_1.csv", sep = ";", stringsAsFactors = F)
 
-
-
 # populate data frame MOP 4
 for (idx in 1:length(dataset[, 1])) {
   vector <- c()
@@ -21,7 +19,6 @@ for (idx in 1:length(dataset[, 1])) {
   dataset$max_workers[idx] <- length(split)
   dataset$mean_rating[idx] <- mean(as.numeric(c(strsplit((c(dataset$how_natural[idx])), ",")[[1]])))
   dataset$std_dev[idx] <- sd(as.numeric(c(strsplit((c(dataset$how_natural[idx])), ",")[[1]])))
-  
 }
 
 #calculate mean + std_dev per country
@@ -858,8 +855,107 @@ cat( sd(vector), "\n")
         sd_2_5 <- sd_2_5 + 1
       }  
       
-    }}
+    }
+    }
   
+#### ONLY USE SENTENCES OF 20 WORKERS FOR DROPOFF
+  for (idx in 2:20){ 
+    assign(paste("rel_worker_mean",idx, sep="_"), (c(NULL)))
+    assign(paste("rel_worker_sd",idx, sep="_"), (c(NULL)))
+    
+  }
+  
+  
+  for (idx in 1:length(dataset[, 1])) {
+    append_list <- c(NULL)
+    if (!is.na(as.numeric(dataset$max_workers[idx]))){
+      if (as.numeric(dataset$max_workers[idx] == 20)){
+        split <- strsplit(dataset$how_natural[idx], ",")[[1]]
+        
+        for (jdx in 1:length(split)){
+          append_list <- append(append_list, as.numeric(split[jdx]))
+        }
+        
+        rel_worker_mean_20 <- append (rel_worker_mean_20, mean(append_list))
+        rel_worker_sd_20 <- append (rel_worker_sd_20, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_19 <- append (rel_worker_mean_19, mean(append_list))
+        rel_worker_sd_19 <- append (rel_worker_sd_19, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_18 <- append (rel_worker_mean_18, mean(append_list))
+        rel_worker_sd_18 <- append (rel_worker_sd_18, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_17 <- append (rel_worker_mean_17, mean(append_list))
+        rel_worker_sd_17 <- append (rel_worker_sd_17, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_16 <- append (rel_worker_mean_16, mean(append_list))
+        rel_worker_sd_16 <- append (rel_worker_sd_16, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_15 <- append (rel_worker_mean_15, mean(append_list))
+        rel_worker_sd_15 <- append (rel_worker_sd_15, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_14 <- append (rel_worker_mean_14, mean(append_list))
+        rel_worker_sd_14 <- append (rel_worker_sd_14, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_13 <- append (rel_worker_mean_13, mean(append_list))
+        rel_worker_sd_13 <- append (rel_worker_sd_13, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_12 <- append (rel_worker_mean_12, mean(append_list))
+        rel_worker_sd_12 <- append (rel_worker_sd_12, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_11 <- append (rel_worker_mean_11, mean(append_list))
+        rel_worker_sd_11 <- append (rel_worker_sd_11, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_10 <- append (rel_worker_mean_10, mean(append_list))
+        rel_worker_sd_10 <- append (rel_worker_sd_10, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_9 <- append (rel_worker_mean_9, mean(append_list))
+        rel_worker_sd_9 <- append (rel_worker_sd_9, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_8 <- append (rel_worker_mean_8, mean(append_list))
+        rel_worker_sd_8 <- append (rel_worker_sd_8, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_7 <- append (rel_worker_mean_7, mean(append_list))
+        rel_worker_sd_7 <- append (rel_worker_sd_7, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_6 <- append (rel_worker_mean_6, mean(append_list))
+        rel_worker_sd_6 <- append (rel_worker_sd_6, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_5 <- append (rel_worker_mean_5, mean(append_list))
+        rel_worker_sd_5 <- append (rel_worker_sd_5, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_4 <- append (rel_worker_mean_4, mean(append_list))
+        rel_worker_sd_4 <- append (rel_worker_sd_4, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_3 <- append (rel_worker_mean_3, mean(append_list))
+        rel_worker_sd_3 <- append (rel_worker_sd_3, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+        rel_worker_mean_2 <- append (rel_worker_mean_2, mean(append_list))
+        rel_worker_sd_2 <- append (rel_worker_sd_2, sd(append_list))
+        append_list <- append_list [-length(append_list)]
+        
+      }
+    }
+  }
+      
 #exporting dataset as csv
 write.csv(dataset, file = "MOP2_final.csv",row.names=FALSE, na="")
 write.csv(dataset, file = "MOP4_final_mergemop2.csv",row.names=FALSE, na="")
